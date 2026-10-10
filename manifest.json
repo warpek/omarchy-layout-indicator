@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.warpek.layout-indicator",
+  "name": "Layout Indicator",
+  "version": "1.0.0",
+  "author": "Pawel Warowny",
+  "license": "MIT",
+  "description": "Shows the Hyprland tiling layout of the focused workspace as a single icon.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Layout Indicator",
+    "description": "Icon for the focused workspace's tiling layout; click to toggle.",
+    "category": "Compositor",
+    "allowMultiple": false,
+    "defaultSection": "left",
+    "aliases": [
+      "hyprland layout",
+      "tiling layout",
+      "dwindle",
+      "scrolling"
+    ]
+  },
+  "homepage": "https://github.com/warpek/omarchy-layout-indicator"
+}
