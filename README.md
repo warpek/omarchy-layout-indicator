@@ -4,7 +4,7 @@ An Omarchy bar widget that shows a single icon for the Hyprland tiling layout
 of the focused workspace. Hyprland sets layouts per workspace, so the icon
 follows you as you switch workspaces and monitors.
 
-![Layout Indicator in the Omarchy bar](preview.png)
+<img src="preview.png" alt="Layout Indicator next to the workspaces in the Omarchy bar" width="134">
 
 | Layout    | Icon | Glyph                           |
 |-----------|------|---------------------------------|
@@ -24,10 +24,11 @@ dwindle and scrolling with Omarchy's own `omarchy-hyprland-workspace-layout-togg
 omarchy plugin add https://github.com/warpek/omarchy-layout-indicator
 ```
 
-Then enable it, if you didn't when prompted:
+The installer offers to enable it and suggests the left side of the bar, next
+to the workspaces. To enable it later:
 
 ```bash
-omarchy plugin enable io.github.warpek.layout-indicator center
+omarchy plugin enable io.github.warpek.layout-indicator left
 ```
 
 ## Remove
