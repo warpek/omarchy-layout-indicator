@@ -8,7 +8,7 @@ BarWidget {
   id: root
   moduleName: "io.github.warpek.layout-indicator"
 
-  // Effective tiling layout of the focused workspace ("dwindle", "scrolling", ...).
+  // Effective workspace layout, including Omarchy's floating mode.
   property string layoutName: ""
   property bool refreshPending: false
 
@@ -16,6 +16,7 @@ BarWidget {
     "dwindle": String.fromCodePoint(0xF0574),   // md-view_quilt
     "master": String.fromCodePoint(0xF0BCC),    // md-view_split_vertical
     "scrolling": String.fromCodePoint(0xF056C), // md-view_carousel
+    "floating": String.fromCodePoint(0xF05B2),  // md-window_restore (overlapping windows)
     "monocle": String.fromCodePoint(0xF0E5F)    // md-rectangle_outline
   })
   readonly property string fallbackIcon: String.fromCodePoint(0xF0614) // md-application_outline
@@ -52,18 +53,14 @@ BarWidget {
 
   Process {
     id: queryProc
-    command: ["hyprctl", "activeworkspace", "-j"]
+    // Hyprland's tiledLayout does not report Omarchy's floating workspace mode.
+    command: ["omarchy", "hyprland", "workspace", "layout", "current"]
     onRunningChanged: if (!running && root.refreshPending) root.refresh()
     stdout: StdioCollector {
       waitForEnd: true
       onStreamFinished: {
-        let layout
-        try {
-          layout = JSON.parse(text || "{}").tiledLayout
-        } catch (e) {
-          return
-        }
-        if (typeof layout !== "string") return
+        const layout = text.trim()
+        if (!/^[a-z][a-z0-9_-]*$/.test(layout)) return
         if (layout !== root.layoutName) root.layoutName = layout
       }
     }
